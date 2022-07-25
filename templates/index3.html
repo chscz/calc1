@@ -96,8 +96,20 @@
             }
 
 <!--            function test1(num) {-->
-<!--                document.testform.submit();-->
-<!--            }            -->
+<!--                data = $('#text').val();-->
+<!--                $.ajax({-->
+<!--                    type:'POST',-->
+<!--                    url:'127.0.0.1:8000/test',-->
+<!--                    data:JSON.stringify(data),-->
+<!--                    success:function(json){-->
+<!--                        console.log("data pass success",json);-->
+<!--                    },-->
+<!--                    error : function(xhr,errmsg,err) {-->
+<!--                    console.log(xhr.status + ": " + xhr.responseText);-->
+<!--                    }-->
+<!--               });-->
+<!--              };-->
+
         </script>
     </head>
     <body>
@@ -135,16 +147,18 @@
                     <div class="btn4 btn-a" onclick="inputNum(0)">0</div>
                     <div class="btn3 btn-a" onclick="inputNum('.')">.</div>
                     <div class="btn2 btn-a" onclick="inputCal('=')">＝</div>
+                    <div class="btn4 btn-a" onclick="test1(6)">0t</div>
                 </div>
-<!--                <form action="{퍼 url 'test1:views' 퍼}" name="testform" method="POST">-->
-<!--                    {% csrf_token %}-->
-<!--                    <div class="btn4 btn-a" onclick="test1(6)" value="6666" name="666">0t</div>-->
-<!--                </form>                -->
+
             </div>
-            <div class="history"><div>< history ></div><div></div>
+            <div class="history">
+                <div>
+                    < history >
+                </div>
+                <div>
+
+                </div>
             </div>
          </div>
     </body>
 </html>
-
-
