@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <script>
+            calnum1 = ''
+            calnum2 = ''
+            isSecondNum = false
+            registCal = ''
+
+            function inputNum(num){
+                if (!isSecondNum) {
+                    if ( (num == '.') && (calnum1 == '') ){
+                        calnum1 = '0'
+                    }
+                    calnum1 += num
+                    console.log('---------[1] calnum1:', calnum1)
+                    document.getElementById("tb").innerHTML = calnum1
+                } else {
+                    if ( (num == '.') && (calnum2 == '') ){
+                        calnum2 = '0'
+                    }
+                    calnum2 += num
+                    console.log('---------[2] calnum2:', calnum2)
+                    document.getElementById("tb").innerHTML = calnum2
+                }
+                console.log('calnum1:', calnum1, 'calnum2:', calnum2)
+            }
+
+            function inputCal(cal){
+                console.log(cal)
+                if ( calnum1 == '' ){
+                } else {
+                    if ( !calnum2 ) {
+                        console.log('---------[3]')
+                        if ( cal != '=' ){
+                            console.log('---------[4]')
+                            console.log('[1-1]')
+                            isSecondNum = true
+                            registCal = cal
+                        }
+                    } else {
+                        console.log('---------[5]')
+                        res = calculate(Number(calnum1), Number(calnum2), registCal)
+                        document.getElementById("tb").innerHTML = res
+                        registCal = cal
+                        calnum1 = String(res)
+                        calnum2 = ''
+                        console.log('---------[5-1] registCal:', registCal)
+                    }
+                }
+            }
+
+            function calculate(num1, num2, type) {
+                console.log('---------[6]')
+                result = 0
+                if ( type == '+' ){
+                    result = num1 + num2
+                } else if ( type == '-' ){
+                    result = num1 - num2
+                } else if ( type == '*' ){
+                    result = num1 * num2
+                } else if ( type == '/' ){
+                    result = num1 / num2
+                }
+                return result
+            }
+
+            function reset() {
+                console.log("clear")
+                calnum1 = ''
+                calnum2 = ''
+                isSecondNum = false
+                registCal = ''
+                document.getElementById("tb").innerHTML = '0'
+            }
+
+            function plusminus() {
+                val = document.getElementById("tb").innerText
+                if ( val.substr(0, 1) == '-' ){
+                    calnum1 = val.slice(1)
+                } else {
+                    calnum1 = '-' + val
+                }
+                document.getElementById("tb").innerHTML = calnum1
+            }
+
+            function percent() {
+                val = Number(document.getElementById("tb").innerText)
+                calnum1 = String(val/100)
+                document.getElementById("tb").innerHTML = calnum1
+            }
+        </script>
+    </head>
+    <body>
+        <div>
+            <div class="calc">
+                <div id="tb" class="tb">
+                    0
+                </div>
+                <div>
+                    <div class="btn1 btn-a" onclick="reset()">C</div>
+                    <div class="btn1 btn-a" onclick="plusminus()">+/-</div>
+                    <div class="btn1 btn-a" onclick="percent()">%</div>
+                    <div class="btn2 btn-a" onclick="inputCal('/')">÷</div>
+                </div>
+                <div>
+                    <div class="btn3 btn-a" onclick="inputNum(7)">7</div>
+                    <div class="btn3 btn-a" onclick="inputNum(8)">8</div>
+                    <div class="btn3 btn-a" onclick="inputNum(9)">9</div>
+                    <div class="btn2 btn-a" onclick="inputCal('*')">×</div>
+                </div>
+                <div>
+                    <div class="btn3 btn-a" onclick="inputNum(4)">4</div>
+                    <div class="btn3 btn-a" onclick="inputNum(5)">5</div>
+                    <div class="btn3 btn-a" onclick="inputNum(6)">6</div>
+                    <div class="btn2 btn-a" onclick="inputCal('-')">－</div>
+                </div>
+                <div>
+                    <div class="btn3 btn-a" onclick="inputNum(1)">1</div>
+                    <div class="btn3 btn-a" onclick="inputNum(2)">2</div>
+                    <div class="btn3 btn-a" onclick="inputNum(3)">3</div>
+                    <div class="btn2 btn-a" onclick="inputCal('+')">＋</div>
+                </div>
+                <div>
+                    <div class="btn4 btn-a" onclick="inputNum(0)">0</div>
+                    <div class="btn3 btn-a" onclick="inputNum('.')">.</div>
+                    <div class="btn2 btn-a" onclick="inputCal('=')">＝</div>
+                </div>
+            </div>
+            <div class="history">
+                <div>
+                    < history >
+                </div>
+                <div>
+
+                </div>
+            </div>
+         </div>
+    </body>
+</html>
